@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+I am an intern at an HFT firm. My task is to talk about Linux driver. The description of my task is:
+
+>How to write a driver, and how to move stuff to userspace. Something like a kernel-bypass networking.
+
+I want to talk about normal driver, then kernel-bypass driver, then some benchmarks with scenarios mimicking typical HFT settings.
