@@ -39,7 +39,7 @@ def create_order_book_message(update: OrderBookUpdate) -> bytes:
     symbol_bytes = update.symbol.encode('ascii')[:4].ljust(4, b'\x00')
     
     message = struct.pack(
-        '!Q4sIIII',
+        '!Q4sIIIII',
         update.timestamp,
         symbol_bytes,
         int(update.bid_price * 100),  # Price in cents
@@ -63,7 +63,7 @@ class FeedSimulator:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, ttl)
         
-        print(f"Feed simulator initialized: {multicast_group}:{port}")
+        print(f"Feed simulator initialized: {self.multicast_group}:{self.port}")
     
     def send_update(self, update: OrderBookUpdate):
         """Send a single order book update"""
@@ -85,7 +85,7 @@ class FeedSimulator:
         
         print(f"\nStarting single feed: {symbol}")
         print(f"Rate: {rate} msg/sec, Duration: {duration} sec")
-        print(f"Target: {multicast_group}:{self.port}")
+        print(f"Target: {self.multicast_group}:{self.port}")
         print("Press Ctrl+C to stop\n")
         
         try:
